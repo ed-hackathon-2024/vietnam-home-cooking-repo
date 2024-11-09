@@ -1,0 +1,243 @@
+import { nextui } from '@nextui-org/theme';
+
+/** @type {import('tailwindcss').Config} */
+
+const ersteTheme = {
+  base: {
+    light: '#F3F4F6',
+    DEFAULT: '#F5F5F5',
+    dark: '#6B7280',
+  },
+  erste: {
+    blue: '#157FF7',
+    berry: '#E1015B',
+    carrot: '#FF6130',
+    forest: '#028661',
+    lavender: '#AA4BB3',
+    rose: '#EB4C79',
+  },
+  neutral: {
+    hover: '#888888',
+    default: '#444444',
+    secondary: '#666666',
+    'secondary-hover': '#777777',
+    tertiary: '#999999',
+    'tertiary-hover': '#AAAAAA',
+  },
+  success: {
+    hover: '#28a745',
+    default: '#218838',
+    secondary: '#34d058',
+    'secondary-hover': '#28a745',
+    tertiary: '#85e89d',
+    'tertiary-hover': '#78c679',
+  },
+  warning: {
+    secondary: '#FFDD57',
+    hover: '#FFC107',
+    default: '#FFA000',
+    'tertiary-hover': '#FFD54F',
+    tertiary: '#FFE082',
+  },
+  danger: {
+    hover: '#d73a49',
+    default: '#cb2431',
+    secondary: '#e55353',
+    'secondary-hover': '#f9a1a1',
+    tertiary: '#ffe6e6',
+    'tertiary-hover': '#f7d6d6',
+  },
+  text: {
+    default: '#000000',
+    secondary: '#666666',
+    tertiary: '#999999',
+    disabled: '#CCCCCC',
+    'on-disabled': '#E5E5E5',
+  },
+  radius: {
+    small: '2px',
+    base: '8px',
+    large: '16px',
+    full: '50%',
+  },
+  spacing: {
+    100: '4px',
+    200: '8px',
+    300: '12px',
+    400: '16px',
+    600: '24px',
+    800: '32px',
+    1600: '64px',
+    2400: '96px',
+    4000: '128px',
+  },
+};
+
+module.exports = {
+  content: [
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        ...ersteTheme,
+      },
+      borderRadius: {
+        ...ersteTheme.radius, // Adding radius to Tailwind's borderRadius
+      },
+      spacing: {
+        ...ersteTheme.spacing, // Adding spacing scale for gap and padding
+      },
+      fontFamily: {
+        sans: ['var(--font-inter)', 'Helvetica', 'Arial', 'sans-serif'], // Updated with Inter
+        mono: ['Fira Code', 'Courier New', 'monospace'],
+      },
+      fontSize: {
+        titleHero: ['56px', { lineHeight: '64px', fontWeight: '700' }],
+        titlePage: ['48px', { lineHeight: '56px', fontWeight: '600' }],
+        subtitle: ['32px', { lineHeight: '40px', fontWeight: '400' }],
+        heading: ['24px', { lineHeight: '32px', fontWeight: '600' }],
+        subheading: ['20px', { lineHeight: '28px', fontWeight: '500' }],
+        bodyBase: ['16px', { lineHeight: '24px', fontWeight: '400' }],
+        bodySmall: ['14px', { lineHeight: '20px', fontWeight: '400' }],
+        input: ['16px', { lineHeight: '24px', fontWeight: '400' }],
+        code: ['14px', { lineHeight: '20px', fontWeight: '400', fontFamily: 'mono' }],
+      },
+      fontWeight: {
+        regular: '400',
+        medium: '500',
+        semibold: '600',
+        bold: '700',
+      },
+    },
+  },
+  darkMode: 'class',
+  plugins: [
+    nextui({
+      themes: {
+        light: {
+          colors: {
+            primary: ersteTheme.erste.blue,
+            secondary: ersteTheme.erste.berry,
+            success: ersteTheme.success.default,
+            warning: ersteTheme.warning.default,
+            danger: ersteTheme.danger.default,
+            neutral: ersteTheme.neutral.default,
+            background: ersteTheme.base.light,
+            foreground: ersteTheme.base.dark,
+            textDefault: ersteTheme.text.default,
+            textSecondary: ersteTheme.text.secondary,
+            textTertiary: ersteTheme.text.tertiary,
+            textDisabled: ersteTheme.text.disabled,
+            textOnDisabled: ersteTheme.text['on-disabled'],
+          },
+          radius: {
+            small: ersteTheme.radius.small,
+            base: ersteTheme.radius.base,
+            large: ersteTheme.radius.large,
+            full: ersteTheme.radius.full,
+          },
+          spacing: {
+            100: ersteTheme.spacing[100],
+            200: ersteTheme.spacing[200],
+            300: ersteTheme.spacing[300],
+            400: ersteTheme.spacing[400],
+            600: ersteTheme.spacing[600],
+            800: ersteTheme.spacing[800],
+            1600: ersteTheme.spacing[1600],
+            2400: ersteTheme.spacing[2400],
+            4000: ersteTheme.spacing[4000],
+          },
+          fonts: {
+            sans: 'Inter, sans-serif',
+            mono: "'Fira Code', monospace",
+          },
+          fontSizes: {
+            hero: '56px',
+            page: '48px',
+            subtitle: '32px',
+            heading: '24px',
+            subheading: '20px',
+            bodyBase: '16px',
+            bodySmall: '14px',
+            input: '16px',
+            code: '14px',
+          },
+          lineHeights: {
+            hero: '64px',
+            page: '56px',
+            subtitle: '40px',
+            heading: '32px',
+            subheading: '28px',
+            bodyBase: '24px',
+            bodySmall: '20px',
+            input: '24px',
+            code: '20px',
+          },
+        },
+        dark: {
+          colors: {
+            primary: ersteTheme.erste.blue,
+            secondary: ersteTheme.erste.berry,
+            success: ersteTheme.success.secondary,
+            warning: ersteTheme.warning.secondary,
+            danger: ersteTheme.danger.secondary,
+            neutral: ersteTheme.neutral.default,
+            background: ersteTheme.base.dark,
+            foreground: ersteTheme.base.light,
+            textDefault: ersteTheme.base.light,
+            textSecondary: ersteTheme.neutral.secondary,
+            textTertiary: ersteTheme.neutral.tertiary,
+            textDisabled: ersteTheme.text.disabled,
+            textOnDisabled: ersteTheme.text['on-disabled'],
+          },
+          radius: {
+            small: ersteTheme.radius.small,
+            base: ersteTheme.radius.base,
+            large: ersteTheme.radius.large,
+            full: ersteTheme.radius.full,
+          },
+          spacing: {
+            100: ersteTheme.spacing[100],
+            200: ersteTheme.spacing[200],
+            300: ersteTheme.spacing[300],
+            400: ersteTheme.spacing[400],
+            600: ersteTheme.spacing[600],
+            800: ersteTheme.spacing[800],
+            1600: ersteTheme.spacing[1600],
+            2400: ersteTheme.spacing[2400],
+            4000: ersteTheme.spacing[4000],
+          },
+          fonts: {
+            sans: 'Inter, sans-serif',
+            mono: "'Fira Code', monospace",
+          },
+          fontSizes: {
+            hero: '56px',
+            page: '48px',
+            subtitle: '32px',
+            heading: '24px',
+            subheading: '20px',
+            bodyBase: '16px',
+            bodySmall: '14px',
+            input: '16px',
+            code: '14px',
+          },
+          lineHeights: {
+            hero: '64px',
+            page: '56px',
+            subtitle: '40px',
+            heading: '32px',
+            subheading: '28px',
+            bodyBase: '24px',
+            bodySmall: '20px',
+            input: '24px',
+            code: '20px',
+          },
+        },
+      },
+    }),
+  ],
+};
