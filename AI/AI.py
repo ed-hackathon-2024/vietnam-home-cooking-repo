@@ -63,13 +63,9 @@ def generate_response():
 
     # Send the user input to the model with a reminder message
     response = chat_session.send_message(
-<<<<<<< HEAD
         "You only know about finance related topics so if anyone asks you about anything else, you will remind them that you are a financial expert and can only provide advice on finance related topics,but you can also answear questions about financial status of your friends from database. Make the advice concise and actionable. Dont write too much not to overwhelm the user."
         + user_input 
-=======
-        "You only know about finance related topics so if anyone asks you about anything else, you will remind them that you are a financial expert and can only provide advice on finance related topics. Make the advice concise and actionable. Dont write too much not to overwhelm the user."
-        + user_input
->>>>>>> e4f9a91c4cd79b9515d851d74932d3d0e80ba39b
+        +"USER INFO IS IN HISTORY"
     )
     
 
