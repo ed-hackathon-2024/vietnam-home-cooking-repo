@@ -1,43 +1,180 @@
 'use client';
 
-import Image from 'next/image';
+import React, { useState } from 'react';
+import { Box, Avatar, Button, TextField, Typography, Paper, Stack, Grid2 } from '@mui/material';
+import { PaperPlaneRight, Question } from '@phosphor-icons/react';
 
 const ChatbotPage = () => {
-  const suggestedQuestions = ['How can I save more?', 'Can I spend 50€?', 'Achievements'];
+  const [messages, setMessages] = useState([
+    { type: 'bot', text: 'Hi, I’m your Finance Helper Bot! How can I assist you today?' },
+    { type: 'bot', text: 'You can ask about saving tips, investments, or financial goals.' },
+  ]);
+
+  const suggestedQuestions = [
+    'How can I save more?',
+    'How are my friends doing?',
+    'Can I spend 50€ this month?',
+  ];
+
+  const [userInput, setUserInput] = useState('');
+
+  const handleSendMessage = () => {
+    if (!userInput.trim()) return;
+
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { type: 'user', text: userInput.trim() },
+      { type: 'bot', text: `You asked: "${userInput.trim()}". Here's how I can help!` },
+    ]);
+    setUserInput('');
+  };
 
   return (
-    <div className='p-8 bg-gray-50 rounded-lg shadow-xl flex flex-col items-center max-w-3xl mx-auto'>
-      {/* Chatbot Avatar Section */}
-      <div className='relative w-28 h-28 rounded-full flex items-center justify-center bg-blue-100 shadow-md'>
-        <Image
-          src={'/chatbot-avatar.jpg'} // Replace with your chatbot avatar image
+    <Stack
+      sx={{
+        p: 4,
+        bgcolor: 'background.default',
+        minHeight: '90vh',
+        borderRadius: '2rem',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        gap: 2,
+      }}
+    >
+      {/* Header Section */}
+      <Paper
+        elevation={4}
+        sx={{
+          p: 3,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2,
+          borderRadius: '2rem',
+          bgcolor: 'ersteBrand.main',
+          color: 'neutral.light',
+        }}
+      >
+        <Avatar
+          src='/chatbot-avatar.jpg'
           alt='Chatbot Avatar'
-          layout='fill'
-          className='rounded-full object-cover'
+          sx={{
+            width: 80,
+            height: 80,
+            border: '4px solid',
+            borderColor: 'neutral.light',
+          }}
         />
-      </div>
+        <Box>
+          <Typography variant='h5' fontWeight='bold'>
+            Finance Helper Bot
+          </Typography>
+          <Typography variant='body2'>
+            Your personal assistant for all financial queries.
+          </Typography>
+        </Box>
+      </Paper>
 
-      {/* Suggested Questions */}
-      <div className='mt-8 flex flex-wrap gap-4 justify-center'>
-        {suggestedQuestions.map((question, index) => (
-          <button
+      {/* Chat Window */}
+      <Box
+        sx={{
+          flex: 1,
+          overflowY: 'auto',
+          maxHeight: '40vh', // Limit the height to ensure scrollability
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+          px: 2,
+          py: 3,
+          borderRadius: '1.5rem',
+          bgcolor: 'neutral.light',
+          boxShadow: 2,
+        }}
+      >
+        {messages.map((message, index) => (
+          <Box
             key={index}
-            className='bg-blue-600 text-white font-medium px-6 py-3 rounded-sm shadow-lg hover:bg-blue-700 transition ease-in-out'
+            sx={{
+              alignSelf: message.type === 'user' ? 'flex-end' : 'flex-start',
+              maxWidth: '70%',
+              bgcolor: message.type === 'user' ? 'ersteBrand.main' : 'neutral.light',
+              color: message.type === 'user' ? '#157FF7' : 'neutral.dark',
+              p: 2,
+              borderRadius: '1.5rem',
+              boxShadow: 1,
+            }}
           >
-            {question}
-          </button>
+            {message.text}
+          </Box>
         ))}
-      </div>
+      </Box>
 
-      {/* Input Section */}
-      <div className='mt-8 w-full'>
-        <input
-          type='text'
+      {/* Suggestions Section */}
+      <Grid2 container spacing={2} justifyContent='center'>
+        {suggestedQuestions.map((question, index) => (
+          <Grid2 xs={12} sm={4} key={index}>
+            <Button
+              variant='outlined'
+              color='primary'
+              fullWidth
+              startIcon={<Question size={20} />}
+              sx={{
+                py: 1.5,
+                fontWeight: 'bold',
+                borderRadius: '2rem',
+                textTransform: 'none',
+                transition: 'transform 0.2s',
+                '&:hover': {
+                  transform: 'scale(1.05)',
+                  bgcolor: 'neutral.light',
+                },
+              }}
+              onClick={() => setUserInput(question)}
+            >
+              {question}
+            </Button>
+          </Grid2>
+        ))}
+      </Grid2>
+
+      {/* User Input Section */}
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2,
+          bgcolor: 'neutral.light',
+          p: 2,
+          borderRadius: '2rem',
+        }}
+      >
+        <TextField
+          fullWidth
           placeholder='Type your question here...'
-          className='w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition'
+          variant='outlined'
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
+          sx={{
+            bgcolor: 'white',
+            borderRadius: '1.5rem',
+          }}
         />
-      </div>
-    </div>
+        <Button
+          variant='contained'
+          color='primary'
+          startIcon={<PaperPlaneRight size={20} />}
+          onClick={handleSendMessage}
+          sx={{
+            py: 1.5,
+            px: 4,
+            borderRadius: '1.5rem',
+            boxShadow: 2,
+          }}
+        >
+          Send
+        </Button>
+      </Box>
+    </Stack>
   );
 };
 

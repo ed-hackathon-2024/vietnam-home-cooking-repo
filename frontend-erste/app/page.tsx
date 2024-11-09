@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { FinanceHelperNavbar } from '@/components/NavBar/navbar';
+import { FinanceHelperNavbar } from '@/components/navbar/navbar';
 
 const Home = () => {
   return <section className='flex flex-col items-center justify-center bg-base'></section>;

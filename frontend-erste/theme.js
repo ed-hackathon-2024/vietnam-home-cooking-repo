@@ -1,0 +1,96 @@
+// theme.js
+const ersteTheme = {
+  colors: {
+    base: {
+      light: '#F3F4F6',
+      DEFAULT: '#F5F5F5',
+      dark: '#6B7280',
+    },
+    erste: {
+      blue: '#157FF7',
+      berry: '#E1015B',
+      carrot: '#FF6130',
+      forest: '#028661',
+      lavender: '#AA4BB3',
+      rose: '#EB4C79',
+    },
+    neutral: {
+      hover: '#888888',
+      DEFAULT: '#444444',
+      secondary: '#666666',
+      'secondary-hover': '#777777',
+      tertiary: '#999999',
+      'tertiary-hover': '#AAAAAA',
+    },
+    success: {
+      hover: '#28a745',
+      DEFAULT: '#218838',
+      secondary: '#34d058',
+      'secondary-hover': '#28a745',
+      tertiary: '#85e89d',
+      'tertiary-hover': '#78c679',
+    },
+    warning: {
+      secondary: '#FFDD57',
+      hover: '#FFC107',
+      DEFAULT: '#FFA000',
+      'tertiary-hover': '#FFD54F',
+      tertiary: '#FFE082',
+    },
+    danger: {
+      hover: '#d73a49',
+      DEFAULT: '#cb2431',
+      secondary: '#e55353',
+      'secondary-hover': '#f9a1a1',
+      tertiary: '#ffe6e6',
+      'tertiary-hover': '#f7d6d6',
+    },
+    text: {
+      DEFAULT: '#000000',
+      secondary: '#666666',
+      tertiary: '#999999',
+      disabled: '#CCCCCC',
+      'on-disabled': '#E5E5E5',
+    },
+  },
+  radius: {
+    sm: '2px',
+    DEFAULT: '8px',
+    lg: '16px',
+    full: '50%',
+  },
+  spacing: {
+    1: '4px',
+    2: '8px',
+    3: '12px',
+    4: '16px',
+    6: '24px',
+    8: '32px',
+    16: '64px',
+    24: '96px',
+    32: '128px',
+  },
+  fonts: {
+    sans: ['Inter', 'Helvetica', 'Arial', 'sans-serif'],
+    mono: ['Fira Code', 'Courier New', 'monospace'],
+  },
+  fontSizes: {
+    hero: ['56px', '64px'],
+    page: ['48px', '56px'],
+    subtitle: ['32px', '40px'],
+    heading: ['24px', '32px'],
+    subheading: ['20px', '28px'],
+    bodyBase: ['16px', '24px'],
+    bodySmall: ['14px', '20px'],
+    input: ['16px', '24px'],
+    code: ['14px', '20px'],
+  },
+  fontWeights: {
+    regular: '400',
+    medium: '500',
+    semibold: '600',
+    bold: '700',
+  },
+};
+
+module.exports = { ersteTheme };

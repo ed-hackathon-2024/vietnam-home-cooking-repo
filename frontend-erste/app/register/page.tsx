@@ -51,7 +51,6 @@ const RegisterPage = () => {
               fullWidth
               type='text'
               label='Username'
-              {...register('username')}
               error={!!errors.username}
               errorMessage={errors.username?.message}
             />
@@ -61,7 +60,6 @@ const RegisterPage = () => {
               fullWidth
               type='email'
               label='Email'
-              {...register('email')}
               error={!!errors.email}
               errorMessage={errors.email?.message}
             />
@@ -70,7 +68,6 @@ const RegisterPage = () => {
               fullWidth
               type='password'
               label='Password'
-              {...register('password')}
               error={!!errors.password}
               errorMessage={errors.password?.message}
             />
@@ -79,7 +76,6 @@ const RegisterPage = () => {
               fullWidth
               type='password'
               label='Confirm password'
-              {...register('confirmPassword')}
               error={!!errors.confirmPassword}
               errorMessage={errors.confirmPassword?.message}
             />
@@ -103,7 +99,7 @@ const RegisterPage = () => {
       </div>
 
       {/* Right Section - Branding */}
-      <div className='hidden lg:flex flex-1 items-center justify-center bg-green-500'>
+      <div className='hidden lg:flex flex-1 items-center justify-center bg-primary'>
         <div className='text-white text-center space-y-4'></div>
       </div>
     </div>
