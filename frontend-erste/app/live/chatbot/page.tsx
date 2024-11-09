@@ -1,32 +1,94 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Box, Avatar, Button, TextField, Typography, Paper, Stack, Grid2 } from '@mui/material';
 import { PaperPlaneRight, Question } from '@phosphor-icons/react';
+import ReactMarkdown from 'react-markdown';
 
 const ChatbotPage = () => {
   const [messages, setMessages] = useState([
-    { type: 'bot', text: 'Hi, I’m your Finance Helper Bot! How can I assist you today?' },
-    { type: 'bot', text: 'You can ask about saving tips, investments, or financial goals.' },
+    { type: 'bot', text: 'Hi, I’m your **Finance Helper Bot**! How can I assist you today?' },
+    {
+      type: 'bot',
+      text: 'You can ask about **saving tips**, **investments**, or **financial goals**.',
+    },
   ]);
+  const [userInput, setUserInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const chatWindowRef = useRef<HTMLDivElement>(null);
 
+  // Define suggested questions
   const suggestedQuestions = [
     'How can I save more?',
     'How are my friends doing?',
     'Can I spend 50€ this month?',
   ];
 
-  const [userInput, setUserInput] = useState('');
+  const scrollToBottom = () => {
+    if (chatWindowRef.current) {
+      chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
+    }
+  };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!userInput.trim()) return;
 
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { type: 'user', text: userInput.trim() },
-      { type: 'bot', text: `You asked: "${userInput.trim()}". Here's how I can help!` },
-    ]);
-    setUserInput('');
+    const prompt = userInput.trim();
+
+    // Add user's message to the chat
+    setMessages((prevMessages) => [...prevMessages, { type: 'user', text: prompt }]);
+
+    setUserInput(''); // Clear the input field
+
+    setLoading(true);
+
+    try {
+      // Make the POST request to the backend
+      const response = await fetch('http://localhost:5000/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch response from AI');
+      }
+
+      const data = await response.json();
+      const botResponse = data.response;
+
+      // Add the bot's response to the chat
+      setMessages((prevMessages) => [...prevMessages, { type: 'bot', text: botResponse }]);
+    } catch (error) {
+      console.error(error);
+
+      // Add an error message from the bot
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { type: 'bot', text: 'Sorry, something went wrong. Please try again later.' },
+      ]);
+    } finally {
+      setLoading(false); // Stop the loading animation
+    }
+  };
+
+  const animateBotMessage = (text: string) => {
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < text.length) {
+        const partialText = text.substring(0, index + 1);
+        setMessages((prevMessages) => [
+          ...prevMessages.slice(0, -1), // Remove the "Typing..." message
+          { type: 'bot', text: partialText },
+        ]);
+        index++;
+        scrollToBottom();
+      } else {
+        clearInterval(interval);
+      }
+    }, 30);
   };
 
   return (
@@ -40,6 +102,7 @@ const ChatbotPage = () => {
         flexDirection: 'column',
         justifyContent: 'space-between',
         gap: 2,
+        width: '100%',
       }}
     >
       {/* Header Section */}
@@ -77,6 +140,7 @@ const ChatbotPage = () => {
 
       {/* Chat Window */}
       <Box
+        ref={chatWindowRef}
         sx={{
           flex: 1,
           overflowY: 'auto',
@@ -104,9 +168,24 @@ const ChatbotPage = () => {
               boxShadow: 1,
             }}
           >
-            {message.text}
+            <ReactMarkdown>{message.text}</ReactMarkdown>
           </Box>
         ))}
+        {loading && (
+          <Box
+            sx={{
+              alignSelf: 'flex-start',
+              maxWidth: '70%',
+              bgcolor: 'neutral.light',
+              color: 'neutral.dark',
+              p: 2,
+              borderRadius: '1.5rem',
+              boxShadow: 1,
+            }}
+          >
+            Typing...
+          </Box>
+        )}
       </Box>
 
       {/* Suggestions Section */}
