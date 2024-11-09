@@ -29,17 +29,17 @@ const GoalsPage = () => {
   ];
   const rewards = [
     {
-      image: '/reward1.png',
+      image: '/level1.png',
       description: 'Unlock with level 40 and 1000 invested',
       locked: false,
     },
     {
-      image: '/reward2.png',
+      image: '/level2.png',
       description: 'Unlock with level 75 and 10 000 invested',
       locked: true,
     },
     {
-      image: '/reward3.png',
+      image: '/level3.png',
       description: 'Unlock with level 100 and 50 000 invested',
       locked: true,
     },
@@ -151,6 +151,8 @@ const GoalsPage = () => {
         <Grid container spacing={4}>
           {rewards.map((reward, index) => (
             <Grid item xs={12} sm={4} key={index}>
+                <div>
+
               <Card
                 sx={{
                   p: 2,
@@ -170,8 +172,8 @@ const GoalsPage = () => {
                   <Image
                     src={reward.image}
                     alt={`Reward ${index + 1}`}
-                    width={150}
-                    height={150}
+                    width={200}
+                    height={200}
                     style={{ borderRadius: '1rem' }}
                   />
                 </CardMedia>
@@ -195,10 +197,11 @@ const GoalsPage = () => {
                     </Typography>
                   </Box>
                 )}
+              </Card>
                 <Typography variant='body2' color='text.secondary' mt={2}>
                   {reward.description}
                 </Typography>
-              </Card>
+                </div>
             </Grid>
           ))}
         </Grid>
