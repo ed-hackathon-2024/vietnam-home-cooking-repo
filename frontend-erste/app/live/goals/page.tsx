@@ -14,7 +14,11 @@ import {
 import Image from 'next/image';
 
 const GoalsPage = () => {
-  const tips = 'You have saved 23.75 € this month.';
+  const tips =
+    '1. Consider meal planning and creating a grocery list to avoid impulse purchases and reduce food waste.\n' +
+    '2. Explore free or low-cost entertainment options to reduce dining and entertainment expenses.\n' +
+    '3. If you have a car, consider carpooling, using public transportation, or biking for shorter trips to reduce fuel costs.\n' +
+    '4. Review your subscriptions and identify any that you can cancel or downgrade to save money.\n';
   const goals = [
     {
       label: 'You’re 100 € short of your goal.',
@@ -151,57 +155,56 @@ const GoalsPage = () => {
         <Grid container spacing={4}>
           {rewards.map((reward, index) => (
             <Grid item xs={12} sm={4} key={index}>
-                <div>
-
-              <Card
-                sx={{
-                  p: 2,
-                  borderRadius: '1.5rem',
-                  boxShadow: 4,
-                  textAlign: 'center',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  opacity: reward.locked ? 0.5 : 1,
-                  transition: 'transform 0.3s',
-                  '&:hover': {
-                    transform: 'scale(1.05)',
-                  },
-                }}
-              >
-                <CardMedia>
-                  <Image
-                    src={reward.image}
-                    alt={`Reward ${index + 1}`}
-                    width={200}
-                    height={200}
-                    style={{ borderRadius: '1rem' }}
-                  />
-                </CardMedia>
-                {reward.locked && (
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      bgcolor: 'rgba(255, 255, 255, 0.7)',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      borderRadius: '1.5rem',
-                    }}
-                  >
-                    <Typography variant='h6' color='error' fontWeight='bold'>
-                      Locked
-                    </Typography>
-                  </Box>
-                )}
-              </Card>
+              <div>
+                <Card
+                  sx={{
+                    p: 2,
+                    borderRadius: '1.5rem',
+                    boxShadow: 4,
+                    textAlign: 'center',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    opacity: reward.locked ? 0.5 : 1,
+                    transition: 'transform 0.3s',
+                    '&:hover': {
+                      transform: 'scale(1.05)',
+                    },
+                  }}
+                >
+                  <CardMedia>
+                    <Image
+                      src={reward.image}
+                      alt={`Reward ${index + 1}`}
+                      width={200}
+                      height={200}
+                      style={{ borderRadius: '1rem' }}
+                    />
+                  </CardMedia>
+                  {reward.locked && (
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        bgcolor: 'rgba(255, 255, 255, 0.7)',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderRadius: '1.5rem',
+                      }}
+                    >
+                      <Typography variant='h6' color='error' fontWeight='bold'>
+                        Locked
+                      </Typography>
+                    </Box>
+                  )}
+                </Card>
                 <Typography variant='body2' color='text.secondary' mt={2}>
                   {reward.description}
                 </Typography>
-                </div>
+              </div>
             </Grid>
           ))}
         </Grid>

@@ -119,7 +119,7 @@ const ChatbotPage = () => {
         }}
       >
         <Avatar
-          src='/chatbot-avatar.jpg'
+          src='/chat.png'
           alt='Chatbot Avatar'
           sx={{
             width: 80,
